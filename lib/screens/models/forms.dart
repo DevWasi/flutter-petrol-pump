@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:h2n_app/utils/common.dart';
 
 import 'package:h2n_app/utils/manager.dart';
 import 'package:h2n_app/screens/auth/auth_screen.dart';
@@ -7,20 +8,14 @@ import 'package:h2n_app/screens/auth/auth_screen.dart';
 getActions(entity) {
   List? actions;
   switch (entity) {
-    case "register":
-      actions = [
-        {"name": "register", "type": "submit", "color": Colors.white70,
-          "text_style": const TextStyle(fontSize: 15), "alignment": Alignment.center,
-          "padding": const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0)
-        }
-      ];
-      break;
     case "login":
       actions = [
         {
-          "name": "login", "type": "submit",
+          "name": "login",
+          "type": "submit",
           "color": Colors.white70,
-          "text_style": const TextStyle(fontSize: 15), "alignment": Alignment.center,
+          "text_style": const TextStyle(fontSize: 15),
+          "alignment": Alignment.center,
           "padding": const EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
           "shape": RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0))
         }
@@ -34,22 +29,6 @@ getActions(entity) {
 getModel(entity) {
   List? model;
   switch (entity) {
-    case 'signup':
-      model = [
-        {"attribute": "email", "label": "Email", "type": "text",
-          "cursor_color": Colors.white, "icon": Icons.email,
-          "text_color": const TextStyle(color: Colors.white70),
-          "border":const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-          "input_action": TextInputAction.newline
-        },
-        {"attribute": "password", "label": "Password", "type": "password",
-        "cursor_color": Colors.white, "icon": Icons.lock,
-          "text_color": const TextStyle(color: Colors.white70),
-          "border": const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-          "input_action": TextInputAction.done
-        }
-      ];
-      break;
     case 'login':
       model = [
         {"attribute": "email", "label": "Email", "type": "text",
@@ -121,7 +100,7 @@ textField(attribute){
       if(value!.isNotEmpty){
         text = validateString(attribute['label'], value)!;
       }else if(value.isEmpty) {
-        text = 'All Fields Are Required';
+        text = capitalize(attribute['label']) + " is Required";
       }
       return text;
     },

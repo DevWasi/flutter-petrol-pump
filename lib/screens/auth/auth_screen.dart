@@ -79,7 +79,7 @@ class AuthScreenState extends State<AuthScreen> {
   //           Navigator.popAndPushNamed(context, screenHome);
   //         } else if (_prefs.getItem("token") != token) {
   //           scaffoldKey.currentState
-  //               .showSnackBar(buidSnackBar("LOGIN FAILED"));
+  //               .showSnackBar(buildSnackBar("LOGIN FAILED"));
   //         }
   //       },
   //       icon: Icon(
@@ -134,7 +134,7 @@ class AuthScreenState extends State<AuthScreen> {
               case '200': Navigator.popAndPushNamed(context, screenWrapper);
               break;
               case '400': scaffoldKey.currentState
-                  .showSnackBar(buidSnackBar(entity));
+                  .showSnackBar(buildSnackBar(entity));
               break;
             }
             break;
@@ -143,7 +143,7 @@ class AuthScreenState extends State<AuthScreen> {
               case '200':Navigator.popAndPushNamed(context, screenHome);
               break;
               case '422': scaffoldKey.currentState
-                  .showSnackBar(buidSnackBar(entity));
+                  .showSnackBar(buildSnackBar(entity));
             }
             break;
         }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:h2n_app/screens/auth/auth_screen.dart';
 
 import 'package:h2n_app/utils/constants.dart';
 
@@ -9,8 +10,7 @@ routes () {
     // screenUserActivity: (BuildContext context) => UserActivity(),
     // screenSettings: (BuildContext context) => SettingsPage(),
     // screenLearnQuran: (BuildContext context) => LearnQuran(),
-    // screenSignIn: (BuildContext context) => AuthScreen('signin'),
-    // screenSignUp: (BuildContext context) => AuthScreen('signup'),
+    screenLogin: (BuildContext context) => const AuthScreen(name: 'login'),
     // screenUsersStatuses: (BuildContext context) => UsersStatuses(),
     // screenPrayerTimings: (BuildContext context) => PrayerTimings(),
     // screenWrapper: (BuildContext context) => Wrapper(),

@@ -18,8 +18,8 @@ getHeaders() {
 const screenHome            =   '/home';
 const screenLearnQuran      =   '/learn';
 const screenUsersStatuses   =   '/users';
-const screenSignUp          =   '/register';
-const screenSignIn          =   '/login';
+const screenRegister         =   '/register';
+const screenLogin         =   '/login';
 const screenPrayerTimings   =   '/timings';
 const screenSettings        =   '/settings';
 const screenUserActivity    =   '/user_activity';

@@ -1,4 +1,3 @@
-import 'package:h2n_app/request/request_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -114,7 +113,7 @@ Widget headerSection(String name) {
   );
 }
 
-buidSnackBar(String value) {
+buildSnackBar(String value) {
   return SnackBar(
     content: Text(
         value.toUpperCase() +' FAILED',
@@ -128,17 +127,16 @@ buidSnackBar(String value) {
 Future<dynamic> createMap(String key) async {
   var map = <String, dynamic>{};
   var user = <String, dynamic>{};
-  RequestHandler _client = RequestHandler();
   final _prefs = await PreferenceManager.getInstance();
   map['device_type'] = 'android';
   // map['device_id'] = await _client.getFCMToken();
   switch(key) {
-    case "signup":
+    case "register":
       map['username'] = _prefs!.getItem("Email");
       map['password'] = _prefs.getItem("Password");
       user["customer"] = map;
       break;
-    case "signin":
+    case "login":
       map['username'] = _prefs!.getItem("Email");
       map['password'] = _prefs.getItem("Password");
       map['app'] = 'customer';
@@ -165,3 +163,5 @@ convertTime(time){
     return '$hh:${abc[1]} AM';
   }
 }
+
+String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
