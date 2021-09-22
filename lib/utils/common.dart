@@ -45,7 +45,7 @@ getCardFields(context) {
   return fields;
 }
 
-Widget appBar(String name, {dynamic leading}) {
+appBar(String name, {dynamic leading}) {
   Widget appbar;
   if(name == 'dashboard') {
     appbar = AppBar(
@@ -128,8 +128,6 @@ Future<dynamic> createMap(String key) async {
   var map = <String, dynamic>{};
   var user = <String, dynamic>{};
   final _prefs = await PreferenceManager.getInstance();
-  map['device_type'] = 'android';
-  // map['device_id'] = await _client.getFCMToken();
   switch(key) {
     case "register":
       map['username'] = _prefs!.getItem("Email");
@@ -137,10 +135,9 @@ Future<dynamic> createMap(String key) async {
       user["customer"] = map;
       break;
     case "login":
-      map['username'] = _prefs!.getItem("Email");
+      map['login'] = _prefs!.getItem("Email");
       map['password'] = _prefs.getItem("Password");
-      map['app'] = 'customer';
-      user["session"] = map;
+      user = map;
       break;
     case "facebook_login":
       map['app'] = 'customer';

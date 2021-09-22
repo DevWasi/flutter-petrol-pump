@@ -1,63 +1,27 @@
 import 'dart:convert';
-import 'package:h2n_app/utils/manager.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:h2n_app/utils/manager.dart';
+
 import 'package:h2n_app/utils/constants.dart';
-import 'package:h2n_app/utils/common.dart';
 
 class RequestHandler {
   get baseURl => baseURL;
 
 
-  Future<dynamic> post (String path, {dynamic body, bool flag = false}) async {
+  Future<dynamic> post (String path, {dynamic body}) async {
     final _prefs = await PreferenceManager.getInstance();
-    if (flag) {
-      final map = await createMap("facebook_login");
-      http.post(baseURl + path,
-          headers: requestHeaders,
-          body: jsonEncode(map)
-      );
-    } else {
-      final res = http.post(baseURl+path, headers: getHeaders(), body: jsonEncode(body));
+    var url = Uri.parse( baseURl+path);
+    final res = http.post(url, headers: getHeaders(), body: jsonEncode(body));
 
       return res.then((value) {
-        print("====================value====================");
-        print(value);
-        print("====================value====================");
-
-        return value.statusCode.toString();
+      final data = jsonDecode(value.body);
+      _prefs!.setItem("jwt_token", data["token"]);
+      _prefs.setItem("name", data["name"]);
+      _prefs.setItem("role", data["role"]);
+      _prefs.setItem("email", data["email"]);
+      return value.statusCode.toString();
       });
     }
-  }
-  
-  Future<dynamic> update (String path, {dynamic body}) async {
-    dynamic data;
-    await http.put(baseURl +'/'+path, headers: getHeaders(), body: jsonEncode(body)).then((value) {
-      data = jsonDecode(value.body);
-    });
-    
-    return data;
-  }
-
-  Future<dynamic> by (String path, dynamic query, {bool sync = false}) async {
-    if(sync) {
-      dynamic data = await http.post(baseURl+'/'+path+'/by',
-          headers: requestHeaders,
-          body: jsonEncode(query));
-      data = jsonDecode(data.body);
-
-      return data[path];
-    } else {
-      return http.post(baseURl+'/'+path+'/by',
-          headers: requestHeaders,
-          body: jsonEncode(query)).then((value) {
-        final data = jsonDecode(value.body);
-
-        return data[path];
-      });
-    }
-  }
 
   // Future<bool> getProfile() async {
   //   final _prefs = await PreferenceManager.getInstance();

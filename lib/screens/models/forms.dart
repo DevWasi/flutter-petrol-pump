@@ -98,7 +98,7 @@ textField(attribute){
     validator: (value) {
       String? text;
       if(value!.isNotEmpty){
-        text = validateString(attribute['label'], value)!;
+        text = validateString(attribute['label'], value);
       }else if(value.isEmpty) {
         text = capitalize(attribute['label']) + " is Required";
       }
@@ -147,11 +147,10 @@ String? validateString(String key, String value) {
           .hasMatch(value)) {
 
     return 'Please Enter A Valid Email';
-  } else if(key == 'Password' && value.length < 6) {
+  } else if(key == 'Password' && value.length < 3) {
 
     return 'Password must be 6 digit long';
   } else {
 
-    return null;
   }
 }
