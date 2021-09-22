@@ -15,12 +15,15 @@ class RequestHandler {
 
       return res.then((value) {
       final data = jsonDecode(value.body);
-      _prefs!.setItem("jwt_token", data["token"]);
-      _prefs.setItem("name", data["name"]);
-      _prefs.setItem("role", data["role"]);
-      _prefs.setItem("email", data["email"]);
-      return value.statusCode.toString();
-      });
+      if(data.containsKey('error')) {
+        return data["error"];
+      } else {
+        _prefs!.setItem("jwt_token", data["token"]);
+        _prefs.setItem("name", data["name"]);
+        _prefs.setItem("role", data["role"]);
+        _prefs.setItem("email", data["email"]);
+        return value.statusCode.toString();
+      }});
     }
 
   // Future<bool> getProfile() async {

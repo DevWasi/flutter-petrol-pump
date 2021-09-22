@@ -128,15 +128,12 @@ class AuthScreenState extends State<AuthScreen> {
         break;
       }
       _client.post(path!, body: body).then((value) {
+
         switch(entity) {
           case 'login':
-            switch(value) {
-              case '200': Navigator.popAndPushNamed(context, screenWrapper);
-              break;
-              case '400': scaffoldKey.currentState
-                  .showSnackBar(buildSnackBar(entity));
-              break;
-            }
+            value == "200" ? Navigator.popAndPushNamed(context, screenWrapper) :
+            scaffoldKey.currentState
+                .showSnackBar(buildSnackBar(value["message"]));
             break;
           case 'register':
             switch(value) {

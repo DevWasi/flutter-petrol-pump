@@ -115,10 +115,7 @@ Widget headerSection(String name) {
 
 buildSnackBar(String value) {
   return SnackBar(
-    content: Text(
-        value.toUpperCase() +' FAILED',
-        style: const TextStyle(color: Colors.white)
-    ),
+    content: Text(value, style: const TextStyle(color: Colors.white)),
     duration: const Duration(seconds: 3),
     backgroundColor: Colors.black,
   );
