@@ -6,7 +6,8 @@ import 'package:h2n_app/utils/manager.dart';
 import 'package:h2n_app/utils/common.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String name;
+  const HomePage({Key? key, required this.name}) : super(key: key);
 
   @override
   HomePageState createState() => HomePageState();
@@ -16,14 +17,14 @@ class HomePageState extends State<HomePage> {
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
-  late String name;
   bool isDrawerOpen = true;
+
+  set name(name) {widget.name;}
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
     getMessage();
   }
 
@@ -69,7 +70,7 @@ class HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 const SizedBox(height: 30.0,),
-                Text('Hi! $name', style: const TextStyle(
+                Text('Hi! $widget.name', style: const TextStyle(
                     fontSize: 24, fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic, color: Colors.white),
                 ),

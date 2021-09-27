@@ -26,29 +26,104 @@ class AuthScreenState extends State<AuthScreen> {
         .copyWith(statusBarColor: Colors.transparent));
     return Scaffold(
       key: scaffoldKey,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            colors: <Color>[
-              Colors.grey,
-              Colors.green
-            ],
+      body: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            top: -20.0,
+            child: Image.asset(
+              "assets/images/background.png",
+              scale: 0.5,
+            ),
           ),
-        ),
-        child: ListView(
-          children: <Widget>[
-            headerSection(widget.name.toUpperCase()),
-            const SizedBox(height: 30.0),
-            getForm(widget.name, formKey, context, scaffoldKey),
-            // SizedBox(height: 30.0),
-            // _buildFacebookButton(),
-            // SizedBox(height: 30.0),
-            // _buildGoogleButton()
-          ],
-        ),
+          SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 15.0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Icon(
+                          Icons.arrow_back_ios_outlined,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Text(
+                        "${widget.name} to your account",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
+                            .copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40.0,),
+                Flexible(
+                  child: Container(
+                    width: double.infinity,
+                    constraints: BoxConstraints(
+                      minHeight:
+                      MediaQuery.of(context).size.height - 180.0,
+                    ),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        topRight: Radius.circular(30.0),
+                      ),
+                      color: Constants.scaffoldBackgroundColor,
+                    ),
+                    padding: const EdgeInsets.all(24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [getForm(widget.name, formKey, context, scaffoldKey),],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
+      // Container(
+      //   decoration: const BoxDecoration(
+      //     gradient: LinearGradient(
+      //         begin: Alignment.topCenter,
+      //         end: Alignment.bottomCenter,
+      //       colors: <Color>[
+      //         Colors.grey,
+      //         Colors.green
+      //       ],
+      //     ),
+      //   ),
+      //   child: ListView(
+      //     children: <Widget>[
+      //       headerSection(widget.name.toUpperCase()),
+      //       const SizedBox(height: 30.0),
+      //       getForm(widget.name, formKey, context, scaffoldKey),
+      //       // SizedBox(height: 30.0),
+      //       // _buildFacebookButton(),
+      //       // SizedBox(height: 30.0),
+      //       // _buildGoogleButton()
+      //     ],
+      //   ),
+      // ),
     );
   }
 

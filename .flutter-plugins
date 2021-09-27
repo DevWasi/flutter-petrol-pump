@@ -1,5 +1,7 @@
 # This is a generated file; do not edit or check into version control.
+path_provider=/usr/local/Caskroom/flutter/2.5.0/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.5/
 path_provider_linux=/usr/local/Caskroom/flutter/2.5.0/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.0/
+path_provider_macos=/usr/local/Caskroom/flutter/2.5.0/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.2/
 path_provider_windows=/usr/local/Caskroom/flutter/2.5.0/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.3/
 shared_preferences=/usr/local/Caskroom/flutter/2.5.0/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.8/
 shared_preferences_linux=/usr/local/Caskroom/flutter/2.5.0/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.0.2/

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:h2n_app/utils/common.dart';
+import 'package:h2n_app/utils/constants.dart';
 
 import 'package:h2n_app/utils/manager.dart';
 import 'package:h2n_app/screens/auth/auth_screen.dart';
 
-
 getActions(entity) {
   List? actions;
   switch (entity) {
-    case "login":
+    case "Login":
       actions = [
         {
           "name": "login",
@@ -29,19 +29,29 @@ getActions(entity) {
 getModel(entity) {
   List? model;
   switch (entity) {
-    case 'login':
+    case 'Login':
       model = [
-        {"attribute": "email", "label": "Email", "type": "text",
-        "cursor_color": Colors.white, "icon": Icons.email, "text_color": const TextStyle(color: Colors.white70),
+        {
+          "attribute": "email",
+          "label": "Email",
+          "type": "text",
           "initial_value": "wasibiit@gmail.com",
-          "border": const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-          ),
+          "cursor_color": Colors.black,
+          "icon": Icons.email,
+          "icon_color": Constants.primaryTextColor,
+          "text_color": const TextStyle(color: Constants.primaryTextColor),
+          "border": const OutlineInputBorder(borderSide: BorderSide(color: Colors.black))
         },
-        {"attribute": "password", "label": "Password", "type": "password",
-        "cursor_color": Colors.white, "icon": Icons.lock, "text_color": const TextStyle(color: Colors.white70),
+        {
+          "attribute": "password",
+          "label": "Password",
+          "type": "password",
+          "cursor_color": Colors.black,
+          "icon": Icons.lock,
+          "icon_color": Constants.primaryTextColor,
+          "text_color": const TextStyle(color: Constants.primaryTextColor),
           "initial_value": "123",
-          "border": const UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
+          "border": const OutlineInputBorder(borderSide: BorderSide(color: Colors.black))
         }
       ];
       break;
@@ -56,10 +66,12 @@ getFields(entity, formkey, context, scaffoldKey) {
   List<Widget> fields = [];
   for (var attribute in model) {
     switch (attribute['type']) {
-      case 'password': fields.add(passwordField(attribute));
+      case 'password':
+        fields.add(passwordField(attribute));
         break;
-      default: fields.add(textField(attribute));
-      break;
+      default:
+        fields.add(textField(attribute));
+        break;
     }
     fields.add(const SizedBox(height: 30.0));
   }
@@ -69,7 +81,7 @@ getFields(entity, formkey, context, scaffoldKey) {
   return fields;
 }
 
-passwordField(attribute){
+passwordField(attribute) {
   return TextFormField(
     textInputAction: attribute['input_action'],
     validator: (value) {
@@ -84,22 +96,24 @@ passwordField(attribute){
     style: attribute['text_color'],
     initialValue: attribute['initial_value'],
     decoration: InputDecoration(
-      icon: Icon(attribute['icon']),
-      border: attribute['border'],
-      labelStyle: attribute['text_color'],
-      labelText: attribute['label']
-    ),
+        icon: Icon(
+            attribute['icon'],
+            color: attribute["icon_color"]
+        ),
+        border: attribute['border'],
+        labelStyle: attribute['text_color'],
+        labelText: attribute['label']),
   );
 }
 
-textField(attribute){
+textField(attribute) {
   return TextFormField(
     textInputAction: attribute['input_action'],
     validator: (value) {
       String? text;
-      if(value!.isNotEmpty){
+      if (value!.isNotEmpty) {
         text = validateString(attribute['label'], value);
-      }else if(value.isEmpty) {
+      } else if (value.isEmpty) {
         text = capitalize(attribute['label']) + " is Required";
       }
       return text;
@@ -112,11 +126,13 @@ textField(attribute){
     style: attribute['text_color'],
     initialValue: attribute['initial_value'],
     decoration: InputDecoration(
-      icon: Icon(attribute['icon']),
-      border: attribute['border'],
-      labelStyle: attribute['text_color'],
-      labelText: attribute['label']
-    ),
+        icon: Icon(
+            attribute['icon'],
+            color: attribute["icon_color"]
+        ),
+        border: attribute['border'],
+        labelStyle: attribute['text_color'],
+        labelText: attribute['label']),
   );
 }
 
@@ -125,32 +141,28 @@ formButton(action, entity, formkey, context, scaffoldKey) {
   return Container(
     alignment: action['alignment'],
     child: ElevatedButton(
-      style: ButtonStyle(
-          shape: MaterialStateProperty.resolveWith((states) => action["shape"]),
-          padding: MaterialStateProperty.resolveWith((states) => action["padding"]),
-          backgroundColor: MaterialStateProperty.resolveWith((states) => action["color"])
-      ),
-      child: Text(action['name'].toUpperCase(), style: action['text_style']),
-      onPressed: () {
+        style: ButtonStyle(
+            shape:
+                MaterialStateProperty.resolveWith((states) => action["shape"]),
+            padding: MaterialStateProperty.resolveWith(
+                (states) => action["padding"]),
+            backgroundColor:
+                MaterialStateProperty.resolveWith((states) => action["color"])),
+        child: Text(action['name'].toUpperCase(), style: action['text_style']),
+        onPressed: () {
           _instance.submitForm(entity, formkey, context, scaffoldKey);
-      }
-    ),
+        }),
   );
 }
 
 String? validateString(String key, String value) {
   if (value.isEmpty) {
-
     return key + ' Is Required';
   } else if (key == 'Email' &&
       !RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
           .hasMatch(value)) {
-
     return 'Please Enter A Valid Email';
-  } else if(key == 'Password' && value.length < 3) {
-
+  } else if (key == 'Password' && value.length < 3) {
     return 'Password must be 6 digit long';
-  } else {
-
-  }
+  } else {}
 }

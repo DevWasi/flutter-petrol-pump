@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:h2n_app/utils/manager.dart';
 
 
@@ -19,6 +21,7 @@ getAuthHeaders() {
 
 
 //ROUTEs
+const screenWelcome            =   '/';
 const screenHome            =   '/home';
 const screenLearnQuran      =   '/learn';
 const screenUsersStatuses   =   '/users';
@@ -30,3 +33,10 @@ const screenUserActivity    =   '/user_activity';
 const screenAbout           =   '/about';
 const screenWrapper         =   '/wrapper';
 const screenQibla           =   '/qibla';
+
+
+class Constants {
+  static const Color primaryColor = Color.fromRGBO(206, 240, 218, 1);
+  static const Color scaffoldBackgroundColor = Color.fromRGBO(245, 247, 249, 1);
+  static const Color primaryTextColor = Color.fromRGBO(74, 77, 84, 1);
+}

@@ -19,7 +19,7 @@ class _WrapperState extends State<Wrapper> {
       body: Stack(
         children: const [
           DrawerScreen(),
-          HomePage(),
+          HomePage(name: '',),
         ],
       ),
     );

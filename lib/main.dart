@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
         title: "Home",
         debugShowCheckedModeBanner: false,
         theme: _buildDarkTheme(),
-        home: const AuthScreen(name: 'login'),
+        initialRoute: "/login",
         routes: routes()
     );
   }
