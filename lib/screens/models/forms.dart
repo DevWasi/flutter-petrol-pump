@@ -5,19 +5,24 @@ import 'package:h2n_app/utils/constants.dart';
 import 'package:h2n_app/utils/manager.dart';
 import 'package:h2n_app/screens/auth/auth_screen.dart';
 
+import 'app_button.dart';
+
 getActions(entity) {
   List? actions;
   switch (entity) {
     case "Login":
       actions = [
         {
-          "name": "login",
-          "type": "submit",
-          "color": Colors.white70,
-          "text_style": const TextStyle(fontSize: 15),
-          "alignment": Alignment.center,
-          "padding": const EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
-          "shape": RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0))
+          "name": "Login",
+          "type": ButtonType.PRIMARY,
+        }
+      ];
+      break;
+      case "Register":
+      actions = [
+        {
+          "name": "Register",
+          "type": ButtonType.PRIMARY,
         }
       ];
       break;
@@ -33,7 +38,7 @@ getModel(entity) {
       model = [
         {
           "attribute": "email",
-          "label": "Email",
+          "label": "Email/Phone",
           "type": "text",
           "initial_value": "wasibiit@gmail.com",
           "cursor_color": Colors.black,
@@ -51,6 +56,30 @@ getModel(entity) {
           "icon_color": Constants.primaryTextColor,
           "text_color": const TextStyle(color: Constants.primaryTextColor),
           "initial_value": "123",
+          "border": const OutlineInputBorder(borderSide: BorderSide(color: Colors.black))
+        }
+      ];
+      break;
+      case 'Register':
+      model = [
+        {
+          "attribute": "email",
+          "label": "Email/Phone",
+          "type": "text",
+          "cursor_color": Colors.black,
+          "icon": Icons.email,
+          "icon_color": Constants.primaryTextColor,
+          "text_color": const TextStyle(color: Constants.primaryTextColor),
+          "border": const OutlineInputBorder(borderSide: BorderSide(color: Colors.black))
+        },
+        {
+          "attribute": "password",
+          "label": "Password",
+          "type": "password",
+          "cursor_color": Colors.black,
+          "icon": Icons.lock,
+          "icon_color": Constants.primaryTextColor,
+          "text_color": const TextStyle(color: Constants.primaryTextColor),
           "border": const OutlineInputBorder(borderSide: BorderSide(color: Colors.black))
         }
       ];
@@ -140,25 +169,19 @@ formButton(action, entity, formkey, context, scaffoldKey) {
   AuthScreenState _instance = AuthScreenState();
   return Container(
     alignment: action['alignment'],
-    child: ElevatedButton(
-        style: ButtonStyle(
-            shape:
-                MaterialStateProperty.resolveWith((states) => action["shape"]),
-            padding: MaterialStateProperty.resolveWith(
-                (states) => action["padding"]),
-            backgroundColor:
-                MaterialStateProperty.resolveWith((states) => action["color"])),
-        child: Text(action['name'].toUpperCase(), style: action['text_style']),
-        onPressed: () {
-          _instance.submitForm(entity, formkey, context, scaffoldKey);
-        }),
+    child: AppButton(
+        onPressed: () { _instance.submitForm(entity, formkey, context, scaffoldKey);},
+        text: action['name'],
+        size: 300.0,
+        type: action['type']
+    ),
   );
 }
 
 String? validateString(String key, String value) {
   if (value.isEmpty) {
     return key + ' Is Required';
-  } else if (key == 'Email' &&
+  } else if (key == 'Email/Phone' &&
       !RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
           .hasMatch(value)) {
     return 'Please Enter A Valid Email';

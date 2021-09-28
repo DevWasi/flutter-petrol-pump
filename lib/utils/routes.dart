@@ -15,6 +15,7 @@ routes () {
     // screenSettings: (BuildContext context) => SettingsPage(),
     // screenLearnQuran: (BuildContext context) => LearnQuran(),
     screenLogin: (BuildContext context) => const AuthScreen(name: "Login"),
+    screenRegister: (BuildContext context) => const AuthScreen(name: "Register"),
     // screenUsersStatuses: (BuildContext context) => UsersStatuses(),
     // screenPrayerTimings: (BuildContext context) => PrayerTimings(),
     screenWrapper: (BuildContext context) => const Wrapper(),

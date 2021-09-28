@@ -75,55 +75,31 @@ class AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 const SizedBox(height: 40.0,),
-                Flexible(
-                  child: Container(
-                    width: double.infinity,
-                    constraints: BoxConstraints(
-                      minHeight:
-                      MediaQuery.of(context).size.height - 180.0,
-                    ),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30.0),
-                        topRight: Radius.circular(30.0),
-                      ),
-                      color: Constants.scaffoldBackgroundColor,
-                    ),
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [getForm(widget.name, formKey, context, scaffoldKey),],
-                    ),
+                Container(
+                  margin: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 100.0),
+                  constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height - 100.0,
                   ),
-                )
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
+                    ),
+                    color: Constants.scaffoldBackgroundColor,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      getForm(widget.name, formKey, context, scaffoldKey),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
-      // Container(
-      //   decoration: const BoxDecoration(
-      //     gradient: LinearGradient(
-      //         begin: Alignment.topCenter,
-      //         end: Alignment.bottomCenter,
-      //       colors: <Color>[
-      //         Colors.grey,
-      //         Colors.green
-      //       ],
-      //     ),
-      //   ),
-      //   child: ListView(
-      //     children: <Widget>[
-      //       headerSection(widget.name.toUpperCase()),
-      //       const SizedBox(height: 30.0),
-      //       getForm(widget.name, formKey, context, scaffoldKey),
-      //       // SizedBox(height: 30.0),
-      //       // _buildFacebookButton(),
-      //       // SizedBox(height: 30.0),
-      //       // _buildGoogleButton()
-      //     ],
-      //   ),
-      // ),
     );
   }
 

@@ -9,8 +9,15 @@ class AppButton extends StatelessWidget {
   final ButtonType type;
   final VoidCallback onPressed;
   final String text;
+  final dynamic size;
 
-  const AppButton({Key? key, required this.type, required this.onPressed, required this.text}) : super(key: key);
+  const AppButton({
+    Key? key,
+    required this.type,
+    required this.onPressed,
+    required this.text,
+    required this.size
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,7 @@ class AppButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         height: 50,
-        width: double.infinity,
+        width: size,
         decoration: BoxDecoration(
           color: getButtonColor(type),
           borderRadius: BorderRadius.circular(8.0),

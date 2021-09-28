@@ -70,6 +70,7 @@ class Welcome extends StatelessWidget {
                   // Let's create a generic button widget
                   AppButton(
                     text: "Log In",
+                    size: double.infinity,
                     type: ButtonType.PLAIN,
                     onPressed: () {
                       nextScreen(context, "/login");
@@ -80,7 +81,11 @@ class Welcome extends StatelessWidget {
                   ),
                   AppButton(
                     text: "Create an Account",
-                    type: ButtonType.PRIMARY, onPressed: () {  },
+                    size: double.infinity,
+                    type: ButtonType.PRIMARY,
+                    onPressed: () {
+                      nextScreen(context, "/register");
+                    },
                   )
                 ],
               ),

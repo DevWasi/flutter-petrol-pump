@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
         title: "Home",
         debugShowCheckedModeBanner: false,
         theme: _buildDarkTheme(),
-        initialRoute: "/login",
+        initialRoute: "/",
         routes: routes()
     );
   }
