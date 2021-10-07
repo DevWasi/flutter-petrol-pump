@@ -125,10 +125,9 @@ passwordField(attribute) {
     style: attribute['text_color'],
     initialValue: attribute['initial_value'],
     decoration: InputDecoration(
-        icon: Icon(
-            attribute['icon'],
-            color: attribute["icon_color"]
-        ),
+        errorBorder: attribute['border'],
+        errorStyle: attribute['text_color'],
+        icon: Icon(attribute['icon'], color: attribute["icon_color"]),
         border: attribute['border'],
         labelStyle: attribute['text_color'],
         labelText: attribute['label']),
@@ -155,10 +154,9 @@ textField(attribute) {
     style: attribute['text_color'],
     initialValue: attribute['initial_value'],
     decoration: InputDecoration(
-        icon: Icon(
-            attribute['icon'],
-            color: attribute["icon_color"]
-        ),
+        errorBorder: attribute['border'],
+        errorStyle: attribute['text_color'],
+        icon: Icon(attribute['icon'], color: attribute["icon_color"]),
         border: attribute['border'],
         labelStyle: attribute['text_color'],
         labelText: attribute['label']),
@@ -179,13 +177,24 @@ formButton(action, entity, formkey, context, scaffoldKey) {
 }
 
 String? validateString(String key, String value) {
-  if (value.isEmpty) {
-    return key + ' Is Required';
-  } else if (key == 'Email/Phone' &&
-      !RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-          .hasMatch(value)) {
-    return 'Please Enter A Valid Email';
-  } else if (key == 'Password' && value.length < 3) {
-    return 'Password must be 6 digit long';
-  } else {}
+  switch(key) {
+    case '':
+      return key + ' Is Required';
+    case 'Email/Phone':
+      if (isNumeric(value) == true && value.length <= 10) {
+        return 'Please Enter A Valid Phone Number';
+      } else if(isEmail(value) != true && isNumeric(value) != true) {
+        return 'Please Enter A Valid Email';
+      } else {
+        return null;
+      }
+    case 'Password':
+      if (value == '') {
+        return key + ' Is Required';
+      } else if (value.length < 3){
+        return 'Password must be 6 digit long';
+      }
+      break;
+    default: null;
+  }
 }
