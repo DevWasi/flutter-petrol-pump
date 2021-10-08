@@ -126,15 +126,13 @@ Future<dynamic> createMap(String key) async {
   var user = <String, dynamic>{};
   final _prefs = await PreferenceManager.getInstance();
   switch(key) {
-    case "register":
-      map['username'] = _prefs!.getItem("Email");
+    case "Register":
+      map['login'] = _prefs!.getItem("Email/Phone");
       map['password'] = _prefs.getItem("Password");
-      user["customer"] = map;
       break;
-    case "login":
-      map['login'] = _prefs!.getItem("Email");
+    case "Login":
+      map['login'] = _prefs!.getItem("Email/Phone");
       map['password'] = _prefs.getItem("Password");
-      user = map;
       break;
     case "facebook_login":
       map['app'] = 'customer';
@@ -142,8 +140,7 @@ Future<dynamic> createMap(String key) async {
       user["facebook"] = map;
       break;
   }
-
-  return user;
+  return map;
 }
 
 convertTime(time){

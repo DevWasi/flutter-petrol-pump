@@ -173,20 +173,20 @@ class AuthScreenState extends State<AuthScreen> {
       dynamic body = await createMap(entity);
 
       switch (entity) {
-        case 'login': path = '/login';
+        case 'Login': path = '/login';
         break;
-        case 'register': path = '/register';
+        case 'Register': path = '/register';
         break;
       }
       _client.post(path!, body: body).then((value) {
 
         switch(entity) {
-          case 'login':
+          case 'Login':
             value == "200" ? Navigator.popAndPushNamed(context, screenWrapper) :
             scaffoldKey.currentState
                 .showSnackBar(buildSnackBar(value["message"]));
             break;
-          case 'register':
+          case 'Register':
             switch(value) {
               case '200':Navigator.popAndPushNamed(context, screenHome);
               break;
