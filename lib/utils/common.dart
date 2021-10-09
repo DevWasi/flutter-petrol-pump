@@ -4,46 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:h2n_app/utils/manager.dart';
 import 'package:h2n_app/utils/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
-getCardModel() {
-  List model;
-  model = [
-    {"name": "Users", "margin": const EdgeInsets.all(8.0), "splash_color": Colors.green,
-      "axis_size": MainAxisSize.min, "Icon": const Icon(Icons.people, size: 70.0),
-      "text_style": const TextStyle(fontSize: 17.0), "route": screenUsersStatuses
-    },
-    {"name": "Activity", "margin": const EdgeInsets.all(8.0), "splash_color": Colors.green,
-      "axis_size": MainAxisSize.min, "Icon": const Icon(Icons.local_activity, size: 73.0),
-      "text_style": const TextStyle(fontSize: 17.0), "route": screenUserActivity
-    },
-    {"name": "Prayers", "margin": const EdgeInsets.all(8.0), "splash_color": Colors.green,
-      "axis_size": MainAxisSize.min, "Icon": const Icon(FontAwesomeIcons.mosque, size: 50.0),
-      "text_style": const TextStyle(fontSize: 17.0), "route": screenPrayerTimings
-    },
-    {"name": "Learn Quran", "margin": const EdgeInsets.all(8.0), "splash_color": Colors.green,
-      "axis_size": MainAxisSize.min, "Icon": const Icon(FontAwesomeIcons.bookOpen, size: 50.0),
-      "text_style": const TextStyle(fontSize: 17.0), "route": screenLearnQuran
-    },
-    {"name": "Qibla", "margin": const EdgeInsets.all(8.0), "splash_color": Colors.green,
-      "axis_size": MainAxisSize.min, "Icon": const Icon(FontAwesomeIcons.compass, size: 50.0),
-      "text_style": const TextStyle(fontSize: 17.0), "route": screenQibla
-    },
-  ];
-
-  return model;
-}
-
-getCardFields(context) {
-  List model = getCardModel();
-  List<Widget> fields = <Widget>[];
-  for (var attribute in model) {
-    switch (attribute['name']) {
-      default: fields.add(getCards(attribute, context));
-    }
-  }
-
-  return fields;
-}
+// getCardFields(context) {
+//   List model = getCardModel();
+//   List<Widget> fields = <Widget>[];
+//   for (var attribute in model) {
+//     switch (attribute['name']) {
+//       default: fields.add(getCards(attribute, context));
+//     }
+//   }
+//
+//   return fields;
+// }
 
 appBar(String name, {dynamic leading}) {
   Widget appbar;
@@ -51,7 +24,7 @@ appBar(String name, {dynamic leading}) {
     appbar = AppBar(
       leading: leading,
       title: Text(
-        name.toUpperCase(),
+        capitalize(name),
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 20.0),
       ),
@@ -59,7 +32,7 @@ appBar(String name, {dynamic leading}) {
   } else {
     appbar = AppBar(
       title: Text(
-        name.toUpperCase(),
+        capitalize(name),
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 20.0),
       ),
@@ -118,6 +91,30 @@ buildSnackBar(String value) {
     content: Text(value, style: const TextStyle(color: Colors.white)),
     duration: const Duration(seconds: 3),
     backgroundColor: Colors.black,
+    behavior: SnackBarBehavior.floating
+  );
+}
+
+buildStatCard(value, name, cardColor, valueColor, nameColor){
+  return Container(
+    padding: const EdgeInsets.all(8.0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10.0),
+      color: cardColor,
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Text(NumberFormat.compact().format(value),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                    color: valueColor))),
+        Text(name.toUpperCase(), style: TextStyle(color: nameColor))
+      ],
+    ),
   );
 }
 
@@ -127,12 +124,12 @@ Future<dynamic> createMap(String key) async {
   final _prefs = await PreferenceManager.getInstance();
   switch(key) {
     case "Register":
-      map['login'] = _prefs!.getItem("Email/Phone");
-      map['password'] = _prefs.getItem("Password");
+      map['login'] = await _prefs!.getItem("Email/Phone");
+      map['password'] = await _prefs.getItem("Password");
       break;
     case "Login":
-      map['login'] = _prefs!.getItem("Email/Phone");
-      map['password'] = _prefs.getItem("Password");
+      map['login'] = await _prefs!.getItem("Email/Phone");
+      map['password'] = await _prefs.getItem("Password");
       break;
     case "facebook_login":
       map['app'] = 'customer';

@@ -10,7 +10,7 @@ import 'package:h2n_app/utils/constants.dart';
 routes () {
   dynamic routes = <String, WidgetBuilder>{
     screenWelcome: (BuildContext context) => const Welcome(),
-    screenHome: (BuildContext context) => const HomePage(name: '',),
+    screenHome: (BuildContext context) => const HomeScreen(),
     // screenUserActivity: (BuildContext context) => UserActivity(),
     // screenSettings: (BuildContext context) => SettingsPage(),
     // screenLearnQuran: (BuildContext context) => LearnQuran(),

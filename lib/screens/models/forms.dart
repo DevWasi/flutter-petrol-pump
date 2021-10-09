@@ -40,7 +40,7 @@ getModel(entity) {
           "attribute": "email",
           "label": "Email/Phone",
           "type": "text",
-          "initial_value": "wasibiit@gmail.com",
+          "initial_value": "superadmin@gmail.com",
           "cursor_color": Colors.black,
           "icon": Icons.email,
           "icon_color": Constants.primaryTextColor,

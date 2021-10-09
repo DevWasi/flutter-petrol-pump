@@ -182,16 +182,19 @@ class AuthScreenState extends State<AuthScreen> {
 
         switch(entity) {
           case 'Login':
-            value == "200" ? Navigator.popAndPushNamed(context, screenWrapper) :
-            scaffoldKey.currentState
-                .showSnackBar(buildSnackBar(value["message"]));
+            if(value == "200"){
+              Navigator.of(context).pop();
+              Navigator.popAndPushNamed(context, screenHome);
+            } else {
+              scaffoldKey.currentState.showSnackBar(buildSnackBar(value));
+            }
             break;
           case 'Register':
-            switch(value) {
-              case '200':Navigator.popAndPushNamed(context, screenHome);
-              break;
-              case '422': scaffoldKey.currentState
-                  .showSnackBar(buildSnackBar(entity));
+            if(value == "200"){
+              Navigator.of(context).pop();
+              Navigator.popAndPushNamed(context, screenHome);
+            } else {
+              scaffoldKey.currentState.showSnackBar(buildSnackBar(value));
             }
             break;
         }

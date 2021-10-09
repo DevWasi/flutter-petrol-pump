@@ -16,13 +16,54 @@ class RequestHandler {
       return res.then((value) {
       final data = jsonDecode(value.body);
       if(data.containsKey('error')) {
-        return data["error"];
+        return data["error"]["message"];
       } else {
         _prefs!.setItem("jwt_token", data["token"]);
         _prefs.setItem("name", data["name"]);
         _prefs.setItem("role", data["role"]);
         _prefs.setItem("email", data["email"]);
         return value.statusCode.toString();
+      }});
+    }
+  Future<dynamic> authPost (String path, {dynamic body}) async {
+    final _prefs = await PreferenceManager.getInstance();
+    var url = Uri.parse( baseURl+path);
+    final res = http.post(url, headers: getAuthHeaders(), body: jsonEncode(body));
+
+      return res.then((value) {
+      final data = jsonDecode(value.body);
+      if(data.containsKey('error')) {
+        return data["error"]["message"];
+      } else {
+        _prefs!.setItem("jwt_token", data["token"]);
+        _prefs.setItem("name", data["name"]);
+        _prefs.setItem("role", data["role"]);
+        _prefs.setItem("email", data["email"]);
+        return value.statusCode.toString();
+      }});
+    }
+  Future<dynamic> get (String path) async {
+    final _prefs = await PreferenceManager.getInstance();
+    var url = Uri.parse( baseURl+path);
+    final res = http.get(url, headers: getHeaders());
+      return res.then((value) {
+      final data = jsonDecode(value.body);
+      if(data.containsKey('error')) {
+        return data["error"]["message"];
+      } else {
+        return data["data"];
+      }});
+    }
+  Future<dynamic> authGet (String path) async {
+    final _prefs = await PreferenceManager.getInstance();
+    var url = Uri.parse( baseURl+path);
+    final res = http.get(url, headers: getAuthHeaders());
+      return res.then((value) {
+      final data = jsonDecode(value.body);
+      if(data.containsKey('error')) {
+        return data["error"]["message"];
+      } else {
+        return data["data"];
       }});
     }
 
