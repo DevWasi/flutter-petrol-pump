@@ -3,8 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:h2n_app/utils/helper.dart';
 import 'package:h2n_app/widgets/pie_char.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 buildDialog(stat, context){
+  final List<ChartData> chartData = [
+    ChartData('Total', stat["total"]),
+    ChartData('Remaining', stat["remaining"]),
+    ChartData('sold', stat["sold"])
+  ];
+  final pieSeries = PieSeries<ChartData, String>(
+      enableTooltip: true,
+      dataSource: chartData,
+      xValueMapper: (ChartData data, _) => data.x,
+      yValueMapper: (ChartData data, _) => data.y
+  );
   return showDialog(
     context: context,
     builder: (context) {
@@ -37,7 +49,7 @@ buildDialog(stat, context){
                           ),
                           Expanded(
                             child: Center(
-                              child: buildPieChart(stat),
+                              child: buildPieChart(stat["stock_type"], pieSeries, chartData),
                             ),
                           )
                         ],
@@ -133,4 +145,11 @@ buildTypo(title, value, legendColor, {unit = "liter"}) {
       ],
     ),
   );
+}
+
+
+class ChartData {
+  ChartData(this.x, this.y);
+  final String x;
+  final double y;
 }
