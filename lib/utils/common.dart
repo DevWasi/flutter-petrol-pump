@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'helper.dart';
 import 'package:h2n_app/utils/manager.dart';
-import 'package:h2n_app/utils/constants.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 
 // getCardFields(context) {
 //   List model = getCardModel();
@@ -95,29 +93,6 @@ buildSnackBar(String value) {
   );
 }
 
-buildStatCard(value, name, cardColor, valueColor, nameColor){
-  return Container(
-    padding: const EdgeInsets.all(8.0),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10.0),
-      color: cardColor,
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        FittedBox(
-            fit: BoxFit.fitWidth,
-            child: Text(NumberFormat.compact().format(value),
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: valueColor))),
-        Text(name.toUpperCase(), style: TextStyle(color: nameColor))
-      ],
-    ),
-  );
-}
-
 Future<dynamic> createMap(String key) async {
   var map = <String, dynamic>{};
   var user = <String, dynamic>{};
@@ -150,20 +125,4 @@ convertTime(time){
   } else{
     return '$hh:${abc[1]} AM';
   }
-}
-
-//// caps the first letter of sting
-String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
-
-
-/// check if the string contains only numbers
-bool isNumeric(String str) {
-  RegExp _numeric = RegExp(r'^[0-9]+$');
-  return _numeric.hasMatch(str);
-}
-
-/// check if the string is a valid email
-bool isEmail(String str) {
-  RegExp _email = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-  return _email.hasMatch(str);
 }

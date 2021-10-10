@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:h2n_app/utils/common.dart';
 import 'package:h2n_app/utils/constants.dart';
+import 'package:h2n_app/utils/helper.dart';
 
 import 'package:h2n_app/utils/manager.dart';
 import 'package:h2n_app/screens/auth/auth_screen.dart';

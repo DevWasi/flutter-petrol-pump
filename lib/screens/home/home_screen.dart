@@ -5,6 +5,7 @@ import 'package:h2n_app/request/data_handler.dart';
 import 'package:h2n_app/res/animation1.dart';
 import 'package:h2n_app/utils/common.dart';
 import 'package:h2n_app/utils/constants.dart';
+import 'package:h2n_app/widgets/stat_card.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -79,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisSpacing: 16.0,
         childAspectRatio: 1.5,
         crossAxisCount: 3,
-        children: getCards(stats)
+        children: getCards(stats, context)
       ),
     );
   }
@@ -176,16 +177,11 @@ Widget build(BuildContext context) {
   );
 }
 
-getCards(stats){
+getCards(stats, context){
   List<Widget> cards = [];
-  for(var stat in stats ){
-    cards.add(buildStatCard(
-        stat["sold"],
-        stat["stock_type"],
-        Colors.primaries[Random().nextInt(Colors.primaries.length)],
-        Colors.white,
-        Colors.black)
-    );
+  for(var stat in stats) {
+    cards.add(buildStatCard(context, stat, Colors.white, Colors.black,
+        Colors.primaries[Random().nextInt(Colors.primaries.length)]));
   }
   return cards;
 }
